@@ -9,7 +9,6 @@ jobs:
     working_directory: ~/repo
     environment:
       - SOURCE_BRANCH: master
-      - TARGET_BRANCH: gh-pages
     steps:
       - checkout
       - restore_cache:
@@ -17,11 +16,8 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
       - run: 
-          name: Install dependencies
+          name: Install Dependencies
           command: yarn install
-      - run:
-          name: Install gh-pages globally
-          command: yarn global add gh-pages
       - save_cache:
           paths:
             - node_modules
@@ -33,9 +29,6 @@ jobs:
           name: Deploy Github Pages
           command: |
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
-              git config --global user.email $GH_EMAIL
-              git config --global user.name $GH_NAME
-              yarn run build
-              gh-pages -m "Automatic deployment from master: $CIRCLE_SHA1 [ci skip]" -d build
+              yarn run deploy
             fi
       
