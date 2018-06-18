@@ -2,8 +2,8 @@ version: 2
 jobs:
   build:
     branches:
-      only:
-        - master
+      ignore:
+        - gh-pages
     docker:
       - image: circleci/node:8
     working_directory: ~/repo
@@ -17,8 +17,11 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
       - run: 
-          name: Install Dependencies
+          name: Install dependencies
           command: yarn install
+      - run:
+          name: Install gh-pages globally
+          command: yarn global add gh-pages
       - save_cache:
           paths:
             - node_modules
@@ -32,6 +35,7 @@ jobs:
             if [ $CIRCLE_BRANCH == $SOURCE_BRANCH ]; then
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
-              yarn run deploy
+              yarn run build
+              gh-pages -m "Automatic deployment from master: $CIRCLE_SHA1 [ci skip]" -d build
             fi
       
