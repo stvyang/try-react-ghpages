@@ -23,6 +23,9 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - run: 
+          name: Run Tests
+          command: yarn test
       - deploy:
           name: Deploy Github Pages
           command: |
