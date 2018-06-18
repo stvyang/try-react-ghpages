@@ -11,7 +11,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -m 'Automatic deployment from master: ${CIRCLE_SHA1} [ci skip]' -d build",
+    "deploy": "gh-pages -m 'Automatic deployment from master: $CIRCLE_SHA1 [ci skip]' -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
