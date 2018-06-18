@@ -9,7 +9,8 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">
-            Welcome to React with CircleCI which skips gh-pages with commits
+            Welcome to React with CircleCI which skips gh-pages with dynamic
+            commits
           </h1>
         </header>
         <p className="App-intro">
